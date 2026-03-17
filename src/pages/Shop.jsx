@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { products, newArrivals } from '../data/Products';
+import { products, newArrivals } from '../data/Products.js';
 
 const categories = ['All Products', 'Skin Care', 'Hair Care', 'Makeup'];
 
