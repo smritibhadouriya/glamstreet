@@ -1,0 +1,159 @@
+@import "tailwindcss";
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.spinner-border {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 4px solid transparent;
+  border-top-color: #3b82f6; /* Blue-500 */
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.rounded-div {
+  background-color: #111488; /* Dark blue background similar to the image */
+  border-top-left-radius: 150px; /* Large radius for the top-right corner */
+  border-top-right-radius: 0; /* No radius for top-left */
+  border-bottom-right-radius: 0; /* No radius for bottom-right */
+  border-bottom-left-radius: 0; /* No radius for bottom-left */
+  position: relative; /* Optional, for positioning if needed */
+}
+
+@keyframes float {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(2deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+.animate-float-delayed {
+  animation: float 6s ease-in-out infinite 2s;
+}
+
+.font-hangout {
+  font-family: 'Fredoka', sans-serif;
+}
+
+@keyframes breathe {
+  0%, 100% {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.95;
+    transform: scale(1.2);
+  }
+}
+
+:root {
+  /* Modern system font stack – fast, clean, professional */
+  --heading-font: -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Inter, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+
+  --body-font: -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Inter, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes slide-in {
+  from { opacity: 0; transform: translateX(-20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes pulse-slow {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+.animate-fade-in-up { animation: fade-in-up 0.8s ease-out forwards; }
+.animate-slide-in { animation: slide-in 0.6s ease-out forwards; }
+.animation-delay-300 { animation-delay: 0.3s; }
+.animation-delay-200 { animation-delay: 0.2s; }
+.animation-delay-400 { animation-delay: 0.4s; }
+.animate-pulse-slow { animation: pulse-slow 3s ease-in-out infinite; }
+
+
+@keyframes fadeOut {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes scaleUp {
+  0% { transform: scale(0.9); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.animate-fade-out {
+  animation: fadeOut 0.6s ease forwards;
+}
+
+.animate-scale-up {
+  animation: scaleUp 0.6s ease forwards;
+}
+
+@keyframes floatRandom {
+  0% { transform: translateY(0px) rotate(var(--rotate)); }
+  100% { transform: translateY(0px) rotate(var(--rotate)); }
+}
+
+.random-float {
+  animation: floatRandom 4s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+
+::selection {
+  background: transparent;
+  color: inherit;
+}
+
+::-moz-selection {
+  background: transparent;
+  color: inherit;
+}
+
+/* Primary Page Heading (Hero Level) */
+.heading-primary {
+  @apply text-4xl md:text-5xl lg:text-6xl font-bold leading-tight;
+}
+
+/* Section Heading */
+.heading-secondary {
+  @apply text-3xl md:text-4xl font-bold leading-snug;
+}
+
+/* Light Background Text */
+.heading-dark {
+  @apply text-gray-800;
+}
+
+/* Dark Background Text */
+.heading-light {
+  @apply text-white;
+}
