@@ -642,7 +642,7 @@ function BeautyIntelligence() {
         {/* Mobile Layout (flex column - quiz first, products below) */}
         <div className="flex flex-col md:hidden gap-5">
           {/* RIGHT — Quiz panel (first on mobile) */}
-          <div className="flex flex-col bg-white md:rounded-2xl p-5">
+          <div className="flex flex-col bg-white md:rounded-2xl md:p-5">
             <div className="flex gap-2 justify-center mb-6 flex-wrap">
               {Object.keys(quizData).map((tab) => (
                 <button key={tab} onClick={() => handleTab(tab)} className="px-5 py-2 rounded-full text-sm font-semibold transition-all" style={{ background: activeTab === tab ? "#c0175d" : "white", color: activeTab === tab ? "white" : "#555", border: "1.5px solid", borderColor: activeTab === tab ? "#c0175d" : "#e0c0cc", boxShadow: activeTab === tab ? "0 2px 12px rgba(192,23,93,0.25)" : "none" }}>{tab}</button>
