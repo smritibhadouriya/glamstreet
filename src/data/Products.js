@@ -6,6 +6,7 @@
 export const products = [
   {
     id: 1,
+    slug: "radiance-vitamin-c-serum",
     name: "Radiance Vitamin C Serum",
     brand: "Mamaearth",
     category: "Skin Care",
@@ -25,9 +26,9 @@ export const products = [
     targets: ["Brightening", "Dark Spots", "Uneven Skin Tone"],
     inStock: true,
     retailers: [
-      { name: "Nykaa", price: 520 },
-      { name: "Sephora", price: 560 },
-      { name: "Purplle", price: 510 },
+      { name: "Nykaa", price: 520, redirect: "https://www.nykaa.com/mamaearth-radiance-vitamin-c-serum/p/123456" },
+      { name: "Sephora", price: 560, redirect: "https://www.sephora.com/mamaearth-radiance-vitamin-c-serum-P123456" },
+      { name: "Purplle", price: 510, redirect: "https://www.purplle.com/product/mamaearth-radiance-vitamin-c-serum" },
     ],
     images: [
       "https://imgs.search.brave.com/ogVsvq3hPh2_afzwtJt0eTIVh-tYb-P5yc3vdPBvXnc/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/ZG90YW5ka2V5LmNv/bS9jZG4vc2hvcC9m/aWxlcy9BcnRib2Fy/ZF8yXzJiZGEwZmQy/LTA3ZTktNGMwYi1h/MmNhLTgxYjExN2Fm/NWVlZC5qcGc_dj0x/NzczMzgyMDk0",
@@ -41,6 +42,7 @@ export const products = [
   },
   {
     id: 2,
+    slug: "deep-hydration-dew-cream",
     name: "Deep Hydration Dew Cream",
     brand: "The Glam Street",
     category: "Skin Care",
@@ -60,8 +62,8 @@ export const products = [
     targets: ["Anti-aging", "Hydration", "Repair"],
     inStock: true,
     retailers: [
-      { name: "Nykaa", price: 560 },
-      { name: "Purplle", price: 540 },
+      { name: "Nykaa", price: 560, redirect: "https://www.nykaa.com/the-glam-street-deep-hydration-dew-cream/p/123457" },
+      { name: "Purplle", price: 540, redirect: "https://www.purplle.com/product/the-glam-street-deep-hydration-dew-cream" },
     ],
     images: [
       "https://imgs.search.brave.com/I2YzkkqWcziXzPvfVqEPqE6bptYNmNLMCOJ2lCIDav0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/ZG90YW5ka2V5LmNv/bS9jZG4vc2hvcC9m/aWxlcy8xLTFfMS5q/cGc_dj0xNzYxODg4/ODY4JndpZHRoPTM2MA",
@@ -74,6 +76,7 @@ export const products = [
   },
   {
     id: 3,
+    slug: "gentle-amino-cleanser",
     name: "Gentle Amino Cleanser",
     brand: "The Glam Street",
     category: "Skin Care",
@@ -93,9 +96,9 @@ export const products = [
     targets: ["Deep Cleansing", "Pore Minimizing", "Barrier Repair"],
     inStock: true,
     retailers: [
-      { name: "Nykaa", price: 570 },
-      { name: "Amazon", price: 549 },
-      { name: "Purplle", price: 559 },
+      { name: "Nykaa", price: 570, redirect: "https://www.nykaa.com/the-glam-street-gentle-amino-cleanser/p/123458" },
+      { name: "Amazon", price: 549, redirect: "https://www.amazon.in/dp/B0ABC12345" },
+      { name: "Purplle", price: 559, redirect: "https://www.purplle.com/product/the-glam-street-gentle-amino-cleanser" },
     ],
     images: [
       "https://imgs.search.brave.com/qxHRfxwAl7Kko71xpvqSA3SkcIjkVTQyJLnQ8efO9B4/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/ZG90YW5ka2V5LmNv/bS9jZG4vc2hvcC9m/aWxlcy9BcnRib2Fy/ZF8xX2Y5NGY0NDU2/LWQzMjgtNDI3MS1h/YjdlLTk0YmRlOGM5/YmJkMy5qcGc_dj0x/NzQ1MzIzNTE1Jndp/ZHRoPTM2MA",
@@ -107,6 +110,7 @@ export const products = [
   },
   {
     id: 4,
+    slug: "daily-spf-50-shield",
     name: "Daily SPF 50 Shield",
     brand: "The Glam Street",
     category: "Body",
@@ -126,8 +130,8 @@ export const products = [
     targets: ["Sun Protection", "Oil Control", "Brightening"],
     inStock: true,
     retailers: [
-      { name: "Nykaa", price: 579 },
-      { name: "Sephora", price: 599 },
+      { name: "Nykaa", price: 579, redirect: "https://www.nykaa.com/the-glam-street-daily-spf-50-shield/p/123459" },
+      { name: "Sephora", price: 599, redirect: "https://www.sephora.com/the-glam-street-daily-spf-50-shield-P123459" },
     ],
     images: [
       "https://imgs.search.brave.com/rwAVFOl89LPB3k1NX6FqQS-V79rMEBlX0z8AXqCtiAY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9kb3Rh/bmRrZXl1YXQuZG90/YW5ka2V5LmNvbS9j/ZG4vc2hvcC9maWxl/cy8xLUJSLVNlcnVt/Xzk3ODc4ZGNiLTQ1/NjEtNDUwMC04MDBk/LTkyYWMwNGE0Y2U5/Mi5qcGc_dj0xNzU2/NTA3NTEyJndpZHRo/PTM2MA",
@@ -139,6 +143,7 @@ export const products = [
   },
   {
     id: 5,
+    slug: "night-recovery-oil",
     name: "Night Recovery Oil",
     brand: "The Glam Street",
     category: "Skin Care",
@@ -158,9 +163,9 @@ export const products = [
     targets: ["Anti-aging", "Repair", "Nourishment"],
     inStock: true,
     retailers: [
-      { name: "Nykaa", price: 579 },
-      { name: "Amazon", price: 569 },
-      { name: "Purplle", price: 559 },
+      { name: "Nykaa", price: 579, redirect: "https://www.nykaa.com/the-glam-street-night-recovery-oil/p/123460" },
+      { name: "Amazon", price: 569, redirect: "https://www.amazon.in/dp/B0ABC12346" },
+      { name: "Purplle", price: 559, redirect: "https://www.purplle.com/product/the-glam-street-night-recovery-oil" },
     ],
     images: [
       "https://imgs.search.brave.com/VXaD-PzhGJcXA4u12khRyTz6ld-vF3BWHdGi35n234s/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzLzYzLzJj/LzMyLzYzMmMzMjc1/MjIyMGYwYzRhMmZk/ZWNmMzQ4YTdkYzk0/LmpwZw",
@@ -171,6 +176,7 @@ export const products = [
   },
   {
     id: 6,
+    slug: "bright-eye-lift-cream",
     name: "Bright Eye Lift Cream",
     brand: "The Glam Street",
     category: "Skin Care",
@@ -190,8 +196,8 @@ export const products = [
     targets: ["Dark Circles", "Puffiness", "Fine Lines"],
     inStock: true,
     retailers: [
-      { name: "Nykaa", price: 569 },
-      { name: "Sephora", price: 589 },
+      { name: "Nykaa", price: 569, redirect: "https://www.nykaa.com/the-glam-street-bright-eye-lift-cream/p/123461" },
+      { name: "Sephora", price: 589, redirect: "https://www.sephora.com/the-glam-street-bright-eye-lift-cream-P123461" },
     ],
     images: [
       "https://imgs.search.brave.com/sTcYyTi-wp7pJ7HRFrzXI_DMSucWiJncEOytKBA8yU8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9wbHVt/Z29vZG5lc3MuY29t/L2Nkbi9zaG9wL2Zp/bGVzL25pYS1nZWwt/Xy1uaWEtc2VydW0x/LmpwZz92PTE3MzA5/NzQ0MTgmd2lkdGg9/NDYw",
@@ -202,6 +208,7 @@ export const products = [
   },
   {
     id: 7,
+    slug: "rose-essence-mist",
     name: "Rose Essence Mist",
     brand: "The Glam Street",
     category: "Self Care",
@@ -221,9 +228,9 @@ export const products = [
     targets: ["Hydration", "Toning", "Radiance"],
     inStock: true,
     retailers: [
-      { name: "Nykaa", price: 549 },
-      { name: "Purplle", price: 529 },
-      { name: "Amazon", price: 539 },
+      { name: "Nykaa", price: 549, redirect: "https://www.nykaa.com/the-glam-street-rose-essence-mist/p/123462" },
+      { name: "Purplle", price: 529, redirect: "https://www.purplle.com/product/the-glam-street-rose-essence-mist" },
+      { name: "Amazon", price: 539, redirect: "https://www.amazon.in/dp/B0ABC12347" },
     ],
     images: [
       "https://imgs.search.brave.com/ThEB6ICsePjz1EkaqN2fnBCFCqv-TLvQv4LsXoUDkyQ/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzL2I5L2E0/LzFjL2I5YTQxYzJk/NmM5MWI3YWZiMmM5/NzZkYTk0ZDczNjI4/LmpwZw",
@@ -234,6 +241,7 @@ export const products = [
   },
   {
     id: 8,
+    slug: "detox-clay-purifier",
     name: "Detox Clay Purifier",
     brand: "The Glam Street",
     category: "Skin Care",
@@ -253,8 +261,8 @@ export const products = [
     targets: ["Acne", "Oil Control", "Clogged Pores"],
     inStock: true,
     retailers: [
-      { name: "Nykaa", price: 549 },
-      { name: "Amazon", price: 539 },
+      { name: "Nykaa", price: 549, redirect: "https://www.nykaa.com/the-glam-street-detox-clay-purifier/p/123463" },
+      { name: "Amazon", price: 539, redirect: "https://www.amazon.in/dp/B0ABC12348" },
     ],
     images: [
       "https://tse1.mm.bing.net/th/id/OIP.5AfCwOILxUMq86KFlfnSPgHaHu?pid=ImgDet&w=474&h=494&rs=1&o=7&rm=3",
@@ -266,6 +274,7 @@ export const products = [
   },
   {
     id: 9,
+    slug: "frizz-control-serum",
     name: "Frizz Control Serum",
     brand: "The Glam Street",
     category: "Hair Care",
@@ -285,8 +294,8 @@ export const products = [
     targets: ["Frizz", "Shine", "Smoothness"],
     inStock: true,
     retailers: [
-      { name: "Nykaa", price: 569 },
-      { name: "Amazon", price: 549 },
+      { name: "Nykaa", price: 569, redirect: "https://www.nykaa.com/the-glam-street-frizz-control-serum/p/123464" },
+      { name: "Amazon", price: 549, redirect: "https://www.amazon.in/dp/B0ABC12349" },
     ],
     images: [
       "https://imgs.search.brave.com/cb6zOvJmgom9hD28YezOH-r9Wx19VHxTJDQmWpMZDiA/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzLzk0LzI3/LzhlLzk0Mjc4ZTg4/ODE3OTU5Yzk2MDZk/MWVkNThiOTE3NTVj/LmpwZw",
@@ -297,6 +306,7 @@ export const products = [
   },
   {
     id: 10,
+    slug: "curl-define-cream",
     name: "Curl Define Cream",
     brand: "The Glam Street",
     category: "Hair Care",
@@ -316,8 +326,8 @@ export const products = [
     targets: ["Curl Definition", "Frizz", "Moisture"],
     inStock: true,
     retailers: [
-      { name: "Nykaa", price: 569 },
-      { name: "Purplle", price: 549 },
+      { name: "Nykaa", price: 569, redirect: "https://www.nykaa.com/the-glam-street-curl-define-cream/p/123465" },
+      { name: "Purplle", price: 549, redirect: "https://www.purplle.com/product/the-glam-street-curl-define-cream" },
     ],
     images: [
       "https://imgs.search.brave.com/VXaD-PzhGJcXA4u12khRyTz6ld-vF3BWHdGi35n234s/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzLzYzLzJj/LzMyLzYzMmMzMjc1/MjIyMGYwYzRhMmZk/ZWNmMzQ4YTdkYzk0/LmpwZw",
@@ -328,6 +338,7 @@ export const products = [
   },
   {
     id: 11,
+    slug: "damage-repair-mask",
     name: "Damage Repair Mask",
     brand: "The Glam Street",
     category: "Hair Care",
@@ -347,9 +358,9 @@ export const products = [
     targets: ["Damage Repair", "Strengthening", "Shine"],
     inStock: true,
     retailers: [
-      { name: "Nykaa", price: 569 },
-      { name: "Amazon", price: 549 },
-      { name: "Purplle", price: 559 },
+      { name: "Nykaa", price: 569, redirect: "https://www.nykaa.com/the-glam-street-damage-repair-mask/p/123466" },
+      { name: "Amazon", price: 549, redirect: "https://www.amazon.in/dp/B0ABC12350" },
+      { name: "Purplle", price: 559, redirect: "https://www.purplle.com/product/the-glam-street-damage-repair-mask" },
     ],
     images: [
       "https://imgs.search.brave.com/ThEB6ICsePjz1EkaqN2fnBCFCqv-TLvQv4LsXoUDkyQ/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzL2I5L2E0/LzFjL2I5YTQxYzJk/NmM5MWI3YWZiMmM5/NzZkYTk0ZDczNjI4/LmpwZw",
@@ -360,6 +371,7 @@ export const products = [
   },
   {
     id: 12,
+    slug: "velvet-matte-lipstick",
     name: "Velvet Matte Lipstick",
     brand: "The Glam Street",
     category: "Makeup",
@@ -379,9 +391,9 @@ export const products = [
     targets: ["Color", "Longevity", "Moisture"],
     inStock: true,
     retailers: [
-      { name: "Nykaa", price: 549 },
-      { name: "Sephora", price: 579 },
-      { name: "Ulta", price: 569 },
+      { name: "Nykaa", price: 549, redirect: "https://www.nykaa.com/the-glam-street-velvet-matte-lipstick/p/123467" },
+      { name: "Sephora", price: 579, redirect: "https://www.sephora.com/the-glam-street-velvet-matte-lipstick-P123467" },
+      { name: "Ulta", price: 569, redirect: "https://www.ulta.com/the-glam-street-velvet-matte-lipstick" },
     ],
     images: [
       "https://imgs.search.brave.com/qxHRfxwAl7Kko71xpvqSA3SkcIjkVTQyJLnQ8efO9B4/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/ZG90YW5ka2V5LmNv/bS9jZG4vc2hvcC9m/aWxlcy9BcnRib2Fy/ZF8xX2Y5NGY0NDU2/LWQzMjgtNDI3MS1h/YjdlLTk0YmRlOGM5/YmJkMy5qcGc_dj0x/NzQ1MzIzNTE1Jndp/ZHRoPTM2MA",
@@ -392,6 +404,7 @@ export const products = [
   },
   {
     id: 13,
+    slug: "aura-glow-serum",
     name: "Aura Glow Serum",
     brand: "The Glam Street",
     category: "Skin Care",
@@ -411,8 +424,8 @@ export const products = [
     targets: ["Brightening", "Dark Spots", "Glass Skin"],
     inStock: true,
     retailers: [
-      { name: "Nykaa", price: 569 },
-      { name: "Amazon", price: 549 },
+      { name: "Nykaa", price: 569, redirect: "https://www.nykaa.com/the-glam-street-aura-glow-serum/p/123468" },
+      { name: "Amazon", price: 549, redirect: "https://www.amazon.in/dp/B0ABC12351" },
     ],
     images: [
       "https://imgs.search.brave.com/VXaD-PzhGJcXA4u12khRyTz6ld-vF3BWHdGi35n234s/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzLzYzLzJj/LzMyLzYzMmMzMjc1/MjIyMGYwYzRhMmZk/ZWNmMzQ4YTdkYzk0/LmpwZw",
@@ -423,6 +436,7 @@ export const products = [
   },
   {
     id: 14,
+    slug: "nocturnal-repair",
     name: "Nocturnal Repair",
     brand: "The Glam Street",
     category: "Skin Care",
@@ -442,8 +456,8 @@ export const products = [
     targets: ["Anti-aging", "Fine Lines", "Firmness"],
     inStock: true,
     retailers: [
-      { name: "Nykaa", price: 569 },
-      { name: "Sephora", price: 589 },
+      { name: "Nykaa", price: 569, redirect: "https://www.nykaa.com/the-glam-street-nocturnal-repair/p/123469" },
+      { name: "Sephora", price: 589, redirect: "https://www.sephora.com/the-glam-street-nocturnal-repair-P123469" },
     ],
     images: [
       "https://imgs.search.brave.com/sTcYyTi-wp7pJ7HRFrzXI_DMSucWiJncEOytKBA8yU8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9wbHVt/Z29vZG5lc3MuY29t/L2Nkbi9zaG9wL2Zp/bGVzL25pYS1nZWwt/Xy1uaWEtc2VydW0x/LmpwZz92PTE3MzA5/NzQ0MTgmd2lkdGg9/NDYw",
@@ -454,6 +468,7 @@ export const products = [
   },
   {
     id: 15,
+    slug: "dewy-mist",
     name: "Dewy Mist",
     brand: "The Glam Street",
     category: "Self Care",
@@ -473,8 +488,8 @@ export const products = [
     targets: ["Hydration", "Dewy Finish", "Setting"],
     inStock: true,
     retailers: [
-      { name: "Nykaa", price: 549 },
-      { name: "Purplle", price: 529 },
+      { name: "Nykaa", price: 549, redirect: "https://www.nykaa.com/the-glam-street-dewy-mist/p/123470" },
+      { name: "Purplle", price: 529, redirect: "https://www.purplle.com/product/the-glam-street-dewy-mist" },
     ],
     images: [
       "https://imgs.search.brave.com/cb6zOvJmgom9hD28YezOH-r9Wx19VHxTJDQmWpMZDiA/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzLzk0LzI3/LzhlLzk0Mjc4ZTg4/ODE3OTU5Yzk2MDZk/MWVkNThiOTE3NTVj/LmpwZw",
@@ -485,6 +500,7 @@ export const products = [
   },
   {
     id: 16,
+    slug: "petal-infusion",
     name: "Petal Infusion",
     brand: "The Glam Street",
     category: "Lip",
@@ -504,9 +520,9 @@ export const products = [
     targets: ["Brightening", "Radiance", "Hydration"],
     inStock: true,
     retailers: [
-      { name: "Nykaa", price: 569 },
-      { name: "Sephora", price: 589 },
-      { name: "Amazon", price: 549 },
+      { name: "Nykaa", price: 569, redirect: "https://www.nykaa.com/the-glam-street-petal-infusion/p/123471" },
+      { name: "Sephora", price: 589, redirect: "https://www.sephora.com/the-glam-street-petal-infusion-P123471" },
+      { name: "Amazon", price: 549, redirect: "https://www.amazon.in/dp/B0ABC12352" },
     ],
     images: [
       "https://imgs.search.brave.com/ThEB6ICsePjz1EkaqN2fnBCFCqv-TLvQv4LsXoUDkyQ/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzL2I5L2E0/LzFjL2I5YTQxYzJk/NmM5MWI3YWZiMmM5/NzZkYTk0ZDczNjI4/LmpwZw",
@@ -527,6 +543,12 @@ export const productsById = products.reduce((acc, p) => {
   return acc;
 }, {});
 
+/** All products as a lookup map by slug */
+export const productsBySlug = products.reduce((acc, p) => {
+  acc[p.slug] = p;
+  return acc;
+}, {});
+
 /** Products shown in Featured Products section on Home */
 export const featuredProducts = products.filter((p) => p.featured);
 
@@ -536,6 +558,16 @@ export const signatureProducts = products.filter((p) => p.signature);
 /** Products used in "You Might Also Love" related section on Product Detail */
 export function getRelatedProducts(currentId, count = 4) {
   return products.filter((p) => p.id !== currentId).slice(0, count);
+}
+
+/** Get product by slug */
+export function getProductBySlug(slug) {
+  return productsBySlug[slug] || null;
+}
+
+/** Get product by id */
+export function getProductById(id) {
+  return productsById[id] || null;
 }
 
 /** New arrivals for sidebar widget on Shop page - based on summer glow badge */

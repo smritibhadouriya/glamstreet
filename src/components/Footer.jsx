@@ -1,7 +1,41 @@
 import { Link } from 'react-router-dom';
-import { BsShareFill, BsInstagram, BsYoutube } from 'react-icons/bs';
+import { BsShareFill, BsInstagram, BsYoutube, BsCheckCircle, BsExclamationCircle } from 'react-icons/bs';
+import { useState } from 'react';
 
 export default function Footer() {
+  const [email, setEmail] = useState('');
+  const [subscriptionStatus, setSubscriptionStatus] = useState(null); // 'success', 'error', 'loading', null
+  const [isAnimating, setIsAnimating] = useState(false);
+
+  const handleSubscribe = async (e) => {
+    e.preventDefault();
+    
+    if (!email || !email.includes('@')) {
+      setSubscriptionStatus('error');
+      setIsAnimating(true);
+      setTimeout(() => {
+        setIsAnimating(false);
+        setTimeout(() => setSubscriptionStatus(null), 300);
+      }, 2000);
+      return;
+    }
+
+    setSubscriptionStatus('loading');
+    
+    // Simulate API call
+    setTimeout(() => {
+      setSubscriptionStatus('success');
+      setIsAnimating(true);
+      setEmail('');
+      
+      // Reset after showing success message
+      setTimeout(() => {
+        setIsAnimating(false);
+        setTimeout(() => setSubscriptionStatus(null), 300);
+      }, 2000);
+    }, 1500);
+  };
+
   return (
     <footer className="bg-rose-400/2 border-t border-[#c2185b]/5">
       <div className="max-w-7xl mx-auto px-6 py-12">
@@ -51,7 +85,7 @@ export default function Footer() {
             <ul className="space-y-3 text-[15px]">
               {[
                 { label: 'Shop All', path: '/shop' },
-                { label: 'Best Sellers', path: '/shop' },
+                { label: 'Best Sellers', path: '/shop?badge=best%20seller' },
                 { label: 'Beauty Guide', path: '/blogs' },
                 { label: 'Ingredient Glossary', path: '/#ingredients' },
                 { label: 'Refer a Friend', path: '/' },
@@ -68,7 +102,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Newsletter – Exact placement, input & button */}
+          {/* Newsletter – Exact placement, input & button with animation */}
           <div>
             <h4 className="uppercase text-sm font-semibold tracking-[1px] text-gray-900 mb-5">
               Newsletter
@@ -77,16 +111,77 @@ export default function Footer() {
               Join our community for exclusive early access and beauty tips.
             </p>
             
-            <div className="flex gap-4">
-              <input
-                type="email"
-                placeholder="Email"
-                className="flex-1 bg-gray-200 border border-gray-200 focus:border-gray-300 px-4 py-2 rounded-md text-sm placeholder:text-gray-400 focus:outline-none"
-              />
-              <button className="bg-[#c2185b] hover:bg-pink-700 text-white px-4 py-2 rounded-md font-medium text-sm transition-all">
-                Join
-              </button>
-            </div>
+            <form onSubmit={handleSubscribe} className="relative">
+              <div className="flex gap-4">
+                <div className="relative flex-1">
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Email"
+                    className={`w-full bg-gray-200 border px-4 py-2 rounded-md text-sm placeholder:text-gray-400 focus:outline-none transition-all duration-300 ${
+                      subscriptionStatus === 'error' && isAnimating
+                        ? 'border-red-500 bg-red-50 animate-shake'
+                        : subscriptionStatus === 'success' && isAnimating
+                        ? 'border-green-500 bg-green-50'
+                        : 'border-gray-200 focus:border-gray-300'
+                    }`}
+                    disabled={subscriptionStatus === 'loading' || subscriptionStatus === 'success'}
+                  />
+                  
+                  {/* Success checkmark animation */}
+                  {subscriptionStatus === 'success' && isAnimating && (
+                    <div className="absolute right-3 top-1/2 -translate-y-1/2 text-green-500 animate-bounce-in">
+                      <BsCheckCircle size={18} />
+                    </div>
+                  )}
+                  
+                  {/* Error icon animation */}
+                  {subscriptionStatus === 'error' && isAnimating && (
+                    <div className="absolute right-3 top-1/2 -translate-y-1/2 text-red-500 animate-bounce-in">
+                      <BsExclamationCircle size={18} />
+                    </div>
+                  )}
+                </div>
+                
+                <button
+                  type="submit"
+                  disabled={subscriptionStatus === 'loading' || subscriptionStatus === 'success'}
+                  className={`relative overflow-hidden bg-[#c2185b] hover:bg-pink-700 text-white px-4 py-2 rounded-md font-medium text-sm transition-all duration-300 ${
+                    subscriptionStatus === 'loading' ? 'cursor-wait' : ''
+                  } ${subscriptionStatus === 'success' ? 'bg-green-600 hover:bg-green-700' : ''}`}
+                >
+                  <span className={`transition-all duration-300 inline-block ${
+                    subscriptionStatus === 'loading' ? 'opacity-0 scale-0' : 'opacity-100 scale-100'
+                  }`}>
+                    {subscriptionStatus === 'success' ? 'Subscribed!' : 'Join'}
+                  </span>
+                  
+                  {/* Loading spinner */}
+                  {subscriptionStatus === 'loading' && (
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                    </div>
+                  )}
+                </button>
+              </div>
+              
+              {/* Status message with slide animation */}
+              <div className={`mt-2 text-xs transition-all duration-300 overflow-hidden ${
+                subscriptionStatus === 'error' && isAnimating
+                  ? 'max-h-10 opacity-100 translate-y-0'
+                  : subscriptionStatus === 'success' && isAnimating
+                  ? 'max-h-10 opacity-100 translate-y-0'
+                  : 'max-h-0 opacity-0 -translate-y-2'
+              }`}>
+                {subscriptionStatus === 'error' && (
+                  <p className="text-red-500 animate-fade-in">Please enter a valid email address</p>
+                )}
+                {subscriptionStatus === 'success' && (
+                  <p className="text-green-600 animate-fade-in">Thanks for subscribing! Check your inbox ✨</p>
+                )}
+              </div>
+            </form>
           </div>
         </div>
       </div>
@@ -102,6 +197,44 @@ export default function Footer() {
           </div>
         </div>
       </div>
+
+      {/* Add animation styles */}
+      <style jsx>{`
+        @keyframes shake {
+          0%, 100% { transform: translateX(0); }
+          10%, 30%, 50%, 70%, 90% { transform: translateX(-2px); }
+          20%, 40%, 60%, 80% { transform: translateX(2px); }
+        }
+        
+        .animate-shake {
+          animation: shake 0.5s ease-in-out;
+        }
+        
+        @keyframes bounce-in {
+          0% { transform: translateY(-50%) scale(0); }
+          50% { transform: translateY(-50%) scale(1.2); }
+          100% { transform: translateY(-50%) scale(1); }
+        }
+        
+        .animate-bounce-in {
+          animation: bounce-in 0.3s ease-out;
+        }
+        
+        @keyframes fade-in {
+          from {
+            opacity: 0;
+            transform: translateY(-5px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        .animate-fade-in {
+          animation: fade-in 0.3s ease-out;
+        }
+      `}</style>
     </footer>
   );
 }
