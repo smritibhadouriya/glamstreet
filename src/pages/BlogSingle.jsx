@@ -414,7 +414,7 @@ export default function BlogSingle() {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="lg:sticky lg:top-8 h-fit space-y-8"
+            className="hidden lg:block lg:sticky lg:top-8 h-fit space-y-8"
           >
             <div>
               <h3 className="font-playfair text-base font-bold text-gray-900 mb-3">Concerns</h3>

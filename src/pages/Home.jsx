@@ -254,8 +254,8 @@ function BannerCarousel() {
     return () => clearInterval(timerRef.current);
   }, []);
   return (
-    <div className="max-w-6xl mx-auto">
-      <div className="relative w-full overflow-hidden h-[520px] rounded-3xl">
+    <div className="max-w-6xl mx-auto ">
+      <div className="relative w-full overflow-hidden h-100 md:h-[520px] md:rounded-3xl">
         {banners.map((b, i) => (
           <Link key={b.id} to={b.to} className={`absolute inset-0 transition-opacity duration-700 ${i === current ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
             <img src={b.img} alt={b.label} className="w-full h-full object-contain-cover"/>
@@ -294,7 +294,9 @@ function ShopByCategory() {
         <div ref={sectionRef} className="reveal-section">
           <SectionHeading className="text-center mb-8">Shop By Categories</SectionHeading>
         </div>
-        <div ref={cardsRef} className="flex flex-wrap gap-6 justify-center">
+        
+        {/* Desktop View - Flex layout */}
+        <div ref={cardsRef} className="hidden sm:flex flex-wrap gap-6 justify-center">
           {categories.map((cat) => {
             const isHovered = hoveredCategory === cat.name;
             return (
@@ -313,36 +315,168 @@ function ShopByCategory() {
             );
           })}
         </div>
+
+        {/* Mobile View - Carousel */}
+        <div className="sm:hidden relative">
+          <div className="overflow-x-auto pb-4 hide-scrollbar" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+            <div className="flex gap-4 min-w-max px-2">
+              {categories.map((cat) => {
+                const isHovered = hoveredCategory === cat.name;
+                return (
+                  <Link
+                    key={cat.name}
+                    to={cat.to}
+                    className="flex flex-col items-center gap-2 group"
+                    onMouseEnter={() => setHoveredCategory(cat.name)}
+                    onMouseLeave={() => setHoveredCategory(null)}
+                  >
+                    <div className="w-16 h-16 flex items-center justify-center transition-all duration-200 bg-pink-50 rounded-xl border border-pink-100 shadow-sm shadow-pink-100">
+                      <img src={isHovered ? cat.iconFilled : cat.iconUnfilled} alt={cat.name} className="w-10 h-10 object-cover"/>
+                    </div>
+                    <span className="text-[10px] font-medium text-center leading-tight text-gray-600">{cat.name}</span>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        </div>
       </div>
+
+      {/* Hide scrollbar styles */}
+      <style jsx>{`
+        .hide-scrollbar::-webkit-scrollbar {
+          display: none;
+        }
+      `}</style>
     </section>
   );
-}
+} 
 
 function BeautyEdits() {
   const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
   const sectionRef = useRef(null);
   useReveal(sectionRef);
 
+  // Carousel navigation functions
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev === beautyPanels.length - 1 ? 0 : prev + 1));
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev === 0 ? beautyPanels.length - 1 : prev - 1));
+  };
+
   return (
     <section className="py-12 bg-rose-50/80">
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
-          <div ref={sectionRef} className="reveal-section lg:w-1/3 flex flex-col justify-start md:mt-20">
+          <div ref={sectionRef} className="reveal-section lg:w-1/3 flex flex-col justify-start lg:mt-20">
             <p className="text-gray-900 text-lg font-medium italic mb-1">The Beauty Edits</p>
-            <h2 className="font-playfair text-5xl font-bold text-[#c2185b] leading-none italic">Premium<br/>Essentials</h2>
+            <h2 className="font-playfair text-4xl sm:text-5xl font-bold text-[#c2185b] leading-none italic">Premium<br/>Essentials</h2>
           </div>
+          
           <div className="lg:w-2/3">
-            <div className="flex gap-4">
+            {/* Mobile/Tablet Carousel (visible on screens smaller than lg) */}
+            <div className="lg:hidden relative">
+              <div className="overflow-hidden rounded-3xl">
+                <div 
+                  className="flex transition-transform duration-500 ease-out"
+                  style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+                >
+                  {beautyPanels.map((panel, index) => (
+                    <div key={panel.label} className="w-full flex-shrink-0 px-2">
+                      <Link to={createShopUrl(panel.filter)} className="relative block rounded-3xl overflow-hidden shadow-lg group" style={{ height: '380px' }}>
+                        <div className="relative w-full h-full">
+                          <img 
+                            src={panel.image} 
+                            alt={panel.label} 
+                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                          />
+                          <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-500"/>
+                          <span className="absolute inset-0 flex items-center justify-center text-white font-semibold text-3xl drop-shadow-2xl">
+                            {panel.label}
+                          </span>
+                        </div>
+                      </Link>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              
+              {/* Carousel Navigation Dots */}
+              <div className="flex justify-center gap-2 mt-6">
+                {beautyPanels.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentSlide(index)}
+                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                      currentSlide === index 
+                        ? 'w-6 bg-[#c2185b]' 
+                        : 'bg-[#c2185b]/30 hover:bg-[#c2185b]/50'
+                    }`}
+                    aria-label={`Go to slide ${index + 1}`}
+                  />
+                ))}
+              </div>
+              
+              {/* Optional: Previous/Next Buttons */}
+              <button 
+                onClick={prevSlide}
+                className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 bg-white/80 hover:bg-white text-[#c2185b] p-2 rounded-full shadow-lg transition-all duration-300"
+                aria-label="Previous slide"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+              <button 
+                onClick={nextSlide}
+                className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 bg-white/80 hover:bg-white text-[#c2185b] p-2 rounded-full shadow-lg transition-all duration-300"
+                aria-label="Next slide"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+            </div>
+
+            {/* Desktop Original Layout (visible on lg and above) */}
+            <div className="hidden lg:flex gap-4">
               {beautyPanels.map((panel, index) => (
-                <div key={panel.label} className="flex flex-col transition-all duration-500 ease-in-out" style={{ flex: hoveredIndex === index ? '2' : hoveredIndex === null ? '0.6' : '0.4' }}>
-                  <Link to={createShopUrl(panel.filter)} className="relative rounded-3xl overflow-hidden shadow-lg group" style={{ height: '380px' }} onMouseEnter={() => setHoveredIndex(index)} onMouseLeave={() => setHoveredIndex(null)}>
+                <div 
+                  key={panel.label} 
+                  className="flex flex-col transition-all duration-500 ease-in-out" 
+                  style={{ flex: hoveredIndex === index ? '2' : hoveredIndex === null ? '0.6' : '0.4' }}
+                >
+                  <Link 
+                    to={createShopUrl(panel.filter)} 
+                    className="relative rounded-3xl overflow-hidden shadow-lg group" 
+                    style={{ height: '380px' }} 
+                    onMouseEnter={() => setHoveredIndex(index)} 
+                    onMouseLeave={() => setHoveredIndex(null)}
+                  >
                     <div className="relative w-full h-full">
-                      <img src={panel.image} alt={panel.label} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"/>
-                      {hoveredIndex === index && <div className="absolute inset-0 bg-black/40 transition-opacity duration-500"/>}
-                      {hoveredIndex === index && <span className="absolute inset-0 flex items-center justify-center text-white font-semibold text-3xl drop-shadow-2xl z-10">{panel.label}</span>}
+                      <img 
+                        src={panel.image} 
+                        alt={panel.label} 
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                      {hoveredIndex === index && (
+                        <>
+                          <div className="absolute inset-0 bg-black/40 transition-opacity duration-500"/>
+                          <span className="absolute inset-0 flex items-center justify-center text-white font-semibold text-3xl drop-shadow-2xl z-10">
+                            {panel.label}
+                          </span>
+                        </>
+                      )}
                     </div>
                   </Link>
-                  {hoveredIndex !== index && <span className="mt-4 text-center text-[#c2185b] font-semibold text-xl tracking-wide">{panel.label}</span>}
+                  {hoveredIndex !== index && (
+                    <span className="mt-4 text-center text-[#c2185b] font-semibold text-xl tracking-wide">
+                      {panel.label}
+                    </span>
+                  )}
                 </div>
               ))}
             </div>
@@ -352,7 +486,6 @@ function BeautyEdits() {
     </section>
   );
 }
-
 // ── ProductCard ──────────────────────────────────────────────────
 function ProductCard({ product, className = "" }) {
   return (
@@ -504,9 +637,109 @@ function BeautyIntelligence() {
         <SectionHeading className="inline"><span style={{ color: "#c0175d" }}>Beauty</span> Intelligence</SectionHeading>
         <p className="text-gray-500 text-sm mt-2 max-w-md mx-auto leading-relaxed">Expert tips and product recommendations tailored just for you.</p>
       </div>
-      <div className="max-w-7xl mx-auto rounded-3xl p-6 md:p-8" style={{ background: "linear-gradient(135deg, #fce8f0 0%, #fdf0f5 50%, #f9e5ef 100%)" }}>
-        <div className="grid md:grid-cols-5 gap-5">
+      <div className="max-w-7xl mx-auto md:rounded-3xl  md:p-8 md:bg-[#c0175d]/10 ">
+        
+        {/* Mobile Layout (flex column - quiz first, products below) */}
+        <div className="flex flex-col md:hidden gap-5">
+          {/* RIGHT — Quiz panel (first on mobile) */}
+          <div className="flex flex-col bg-white md:rounded-2xl p-5">
+            <div className="flex gap-2 justify-center mb-6 flex-wrap">
+              {Object.keys(quizData).map((tab) => (
+                <button key={tab} onClick={() => handleTab(tab)} className="px-5 py-2 rounded-full text-sm font-semibold transition-all" style={{ background: activeTab === tab ? "#c0175d" : "white", color: activeTab === tab ? "white" : "#555", border: "1.5px solid", borderColor: activeTab === tab ? "#c0175d" : "#e0c0cc", boxShadow: activeTab === tab ? "0 2px 12px rgba(192,23,93,0.25)" : "none" }}>{tab}</button>
+              ))}
+            </div>
+            
+            {!completed ? (
+              <>
+                <p className="font-bold text-gray-800 text-lg mb-4">{question.question}</p>
+                <div className="flex flex-col gap-2">
+                  {question.options.map((opt) => {
+                    const selected = answers[question.id] === opt.id;
+                    return (
+                      <button key={opt.id} onClick={() => handleSelect(opt.id)} className="flex items-center gap-3 rounded-xl px-4 py-3 text-left hover:scale-[1.01] transition-all" style={{ background: selected ? "#fff0f6" : "white", border: `1.5px solid ${selected ? "#c0175d" : "#ead0db"}`, boxShadow: selected ? "0 2px 10px rgba(192,23,93,0.12)" : "none" }}>
+                        <span className="text-xl">{opt.icon}</span>
+                        <div className="flex-1"><p className="text-sm font-semibold text-gray-800">{opt.label}</p><p className="text-xs text-gray-400">{opt.desc}</p></div>
+                        {selected ? <CheckIcon/> : <CircleIcon/>}
+                      </button>
+                    );
+                  })}
+                </div>
+                <button onClick={handleContinue} disabled={!answers[question.id]} className="mt-5 w-full py-3.5 rounded-xl font-bold text-white text-sm transition-all" style={{ background: answers[question.id] ? "linear-gradient(90deg, #c0175d, #e8386e)" : "#ddd", cursor: answers[question.id] ? "pointer" : "not-allowed", boxShadow: answers[question.id] ? "0 4px 18px rgba(192,23,93,0.3)" : "none" }}>
+                  {currentQ < questions.length - 1 ? "Continue →" : "See My Recommendations →"}
+                </button>
+              </>
+            ) : (
+              <div className="flex flex-col items-center justify-center text-center gap-4 py-8">
+                <div className="text-5xl">✨</div>
+                <h3 className="text-xl font-bold text-gray-800">Your recommendations are ready!</h3>
+                <p className="text-sm text-gray-500 max-w-xs">Based on your answers, we've curated the perfect products for you. Scroll down to see them!</p>
+                <div className="bg-white rounded-xl px-4 py-3 w-full text-left" style={{ border: "1px solid #ead0db" }}>
+                  {questions.map((q) => (
+                    <div key={q.id} className="flex justify-between items-center py-1">
+                      <span className="text-xs text-gray-400">{q.question.replace("What is your ", "").replace("?", "")}</span>
+                      <span className="text-xs font-bold" style={{ color: "#c0175d" }}>{q.options.find((o) => o.id === answers[q.id])?.label || "—"}</span>
+                    </div>
+                  ))}
+                </div>
+                <button onClick={handleReset} className="text-sm font-semibold underline" style={{ color: "#c0175d" }}>Retake Quiz</button>
+              </div>
+            )}
+          </div>
 
+          {/* LEFT — Recommended Products panel (second on mobile) */}
+          <div className="md:rounded-2xl p-5 flex flex-col bg-white">
+            <p className="text-xs font-bold text-gray-700 mb-4 uppercase tracking-widest">Recommended Products</p>
+            {!completed ? (
+              <div className="flex-1 flex flex-col items-center justify-center text-center gap-3 min-h-[200px]">
+                <LockIcon/>
+                <p className="text-gray-400 text-xs leading-relaxed">Complete the questionnaire to see recommendations based on your profile.</p>
+              </div>
+            ) : (
+              <div className="flex-1 flex flex-col gap-3">
+                {recommendedProducts.length === 0 ? (
+                  <p className="text-gray-400 text-xs text-center mt-4">No matching products found.</p>
+                ) : (
+                  recommendedProducts.map((p) => (
+                    <Link key={p.id} to={`/product/${p.slug}`} className="flex items-center gap-3 rounded-xl p-3 hover:scale-[1.02] transition-all bg-pink-50 hover:bg-pink-100">
+                      <div className="w-12 h-12 rounded-lg overflow-hidden shrink-0 bg-white">
+                        <img
+                          src={p.images[0]}
+                          alt={p.name}
+                          className="w-full h-full object-cover"
+                          onError={(e) => {
+                            e.currentTarget.style.display = 'none';
+                            e.currentTarget.parentElement.innerHTML = `<div style="display:flex;align-items:center;justify-content:center;height:100%;font-size:1.4rem">🌸</div>`;
+                          }}
+                        />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-xs font-bold text-gray-800 truncate">{p.name}</p>
+                        <p className="text-xs text-gray-500">{p.brand}</p>
+                        <p className="text-xs text-gray-400">{p.type}</p>
+                      </div>
+                      <div className="text-right shrink-0">
+                        <p className="text-xs font-bold text-gray-800">₹{p.price}</p>
+                        {p.badge && p.badge[0] !== 'none' && (
+                          <span className="text-xs px-1.5 py-0.5 rounded-full" style={{ background: "#c0175d", color: "white", fontSize: "0.6rem" }}>{p.badge[0]}</span>
+                        )}
+                        <div className="flex items-center gap-0.5 mt-0.5 justify-end">
+                          <span className="text-yellow-400 text-xs">★</span>
+                          <span className="text-xs text-gray-500">{p.rating}</span>
+                        </div>
+                      </div>
+                    </Link>
+                  ))
+                )}
+              </div>
+            )}
+            <Link to="/shop" className="mt-4 w-full py-2.5 rounded-xl text-sm font-semibold hover:bg-pink-50 transition-all text-center block" style={{ border: "1.5px solid #c0175d", color: "#c0175d" }}>
+              View All Products
+            </Link>
+          </div>
+        </div>
+
+        {/* Desktop Layout (grid - products left, quiz right) */}
+        <div className="hidden md:grid md:grid-cols-5 gap-5">
           {/* LEFT — Recommended Products panel */}
           <div className="md:col-span-2 rounded-2xl p-5 flex flex-col bg-white" style={{ minHeight: 380 }}>
             <p className="text-xs font-bold text-gray-700 mb-4 uppercase tracking-widest">Recommended Products</p>
@@ -655,8 +888,27 @@ function  SignatureCollection() {
 function SearchByIngredients() {
   const sectionRef = useRef(null);
   const cardsRef = useRef(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
   useReveal(sectionRef);
   useRevealCards(cardsRef, '.reveal-card', 70);
+
+  // Calculate number of slides (showing 3 items per slide on mobile)
+  const itemsPerSlide = 3;
+  const totalSlides = Math.ceil(ingredients.length / itemsPerSlide);
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev === totalSlides - 1 ? 0 : prev + 1));
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev === 0 ? totalSlides - 1 : prev - 1));
+  };
+
+  // Get current slide items
+  const getCurrentSlideItems = () => {
+    const start = currentSlide * itemsPerSlide;
+    return ingredients.slice(start, start + itemsPerSlide);
+  };
 
   return (
     <section id="ingredients" className="py-12 bg-white">
@@ -664,13 +916,96 @@ function SearchByIngredients() {
         <div ref={sectionRef} className="reveal-section mb-8">
           <SectionHeading>Search by Key Ingredients</SectionHeading>
         </div>
-        <div ref={cardsRef} className="flex flex-wrap gap-6 md:gap-8">
+        
+        {/* Mobile Carousel (visible on small screens) */}
+        <div className="block md:hidden">
+          <div className="relative">
+            {/* Carousel Items */}
+            <div className="flex justify-center gap-4 transition-opacity duration-300">
+              {getCurrentSlideItems().map((ingredient, index) => (
+                <Link 
+                  key={`${ingredient.filter}-${index}`} 
+                  to={`/shop?ingredient=${ingredient.filter}`} 
+                  className="flex flex-col items-center group w-[30%]"
+                >
+                  <div className="w-20 h-20 rounded-2xl overflow-hidden transition-all duration-300 shadow-md group-hover:shadow-lg">
+                    <img 
+                      src={ingredient.image} 
+                      alt={ingredient.name} 
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" 
+                      loading="lazy"
+                    />
+                  </div>
+                  <span className="mt-2 text-xs text-center text-gray-700 group-hover:text-pink-600 font-medium transition-colors duration-300 line-clamp-2">
+                    {ingredient.name}
+                  </span>
+                </Link>
+              ))}
+            </div>
+
+            {/* Navigation Buttons (only show if more than one slide) */}
+            {totalSlides > 1 && (
+              <>
+                <button 
+                  onClick={prevSlide}
+                  className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 bg-white/80 hover:bg-white text-pink-600 p-1.5 rounded-full shadow-lg transition-all duration-300"
+                  aria-label="Previous slide"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
+                  </svg>
+                </button>
+                <button 
+                  onClick={nextSlide}
+                  className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 bg-white/80 hover:bg-white text-pink-600 p-1.5 rounded-full shadow-lg transition-all duration-300"
+                  aria-label="Next slide"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+                  </svg>
+                </button>
+              </>
+            )}
+          </div>
+
+          {/* Pagination Dots */}
+          {totalSlides > 1 && (
+            <div className="flex justify-center gap-1.5 mt-4">
+              {Array.from({ length: totalSlides }).map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentSlide(index)}
+                  className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
+                    currentSlide === index 
+                      ? 'w-4 bg-pink-600' 
+                      : 'bg-pink-200 hover:bg-pink-300'
+                  }`}
+                  aria-label={`Go to slide ${index + 1}`}
+                />
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* Desktop Grid (visible on medium screens and above) */}
+        <div ref={cardsRef} className="hidden md:flex flex-wrap gap-6 md:gap-8">
           {ingredients.map((ingredient, index) => (
-            <Link key={index} to={`/shop?ingredient=${ingredient.filter}`} className="reveal-card flex flex-col items-center group">
+            <Link 
+              key={index} 
+              to={`/shop?ingredient=${ingredient.filter}`} 
+              className="reveal-card flex flex-col items-center group"
+            >
               <div className="w-20 h-20 md:w-40 md:h-40 rounded-3xl overflow-hidden transition-all duration-300 shadow-md group-hover:shadow-lg">
-                <img src={ingredient.image} alt={ingredient.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" loading="lazy"/>
+                <img 
+                  src={ingredient.image} 
+                  alt={ingredient.name} 
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" 
+                  loading="lazy"
+                />
               </div>
-              <span className="mt-3 text-sm md:text-base text-gray-700 group-hover:text-pink-600 font-medium transition-colors duration-300">{ingredient.name}</span>
+              <span className="mt-3 text-sm md:text-base text-gray-700 group-hover:text-pink-600 font-medium transition-colors duration-300">
+                {ingredient.name}
+              </span>
             </Link>
           ))}
         </div>
@@ -1036,7 +1371,7 @@ function InnerCircleSection() {
 
   return (
     <section className="flex items-center justify-center bg-white">
-      <div ref={sectionRef} className="reveal-section relative w-full max-w-3xl rounded-2xl overflow-hidden px-10 py-16 flex flex-col items-center text-center" style={{ background: "radial-gradient(ellipse at center, #3d0a1e 0%, #1a0610 60%, #0f0409 100%)" }}>
+      <div ref={sectionRef} className="reveal-section relative w-full max-w-3xl md:rounded-2xl overflow-hidden px-10 py-16 flex flex-col items-center text-center" style={{ background: "radial-gradient(ellipse at center, #3d0a1e 0%, #1a0610 60%, #0f0409 100%)" }}>
         <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse 60% 50% at 50% 60%, rgba(220,50,100,0.18) 0%, transparent 80%)" }}/>
         
         {/* Animated Success/Error Icons */}
@@ -1216,7 +1551,7 @@ export default function Home() {
       <SearchByIngredients/>
       <Reviews/>
       <div className="max-w-7xl mx-auto">
-        <div className="group relative rounded-2xl overflow-hidden h-80 shadow-lg">
+        <div className="group relative md:rounded-2xl overflow-hidden h-80 shadow-lg">
           <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" onClick={() => navigate("/blogs")} style={{ backgroundImage: `url('https://imgs.search.brave.com/Nt57vFtgsU_awOS5tPn2js-obuhYk9RNje2sQk70N1o/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/c2hvcGlmeS5jb20v/cy9maWxlcy8xLzA2/NTcvODU2OS8yMzc1/L2ZpbGVzL0Jsb2df/SW1hZ2UtMV8tY3V0/ZS1hbmQtYWVzdGhl/dGljLXNraW5jYXJl/LWJyYW5kcy15b3Vf/bGwtd2FudC1vbi15/b3VyLXZhbml0eV9D/b21wcmVzc2VkLndl/YnA_dj0xNzUwODA5/ODU3')` }}/>
           <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/30 to-transparent"/>
           <div className="relative h-full flex flex-col justify-between px-8 py-12 text-white">
