@@ -338,7 +338,7 @@ function ShopByCategory() {
                <div className="w-30 h-30 flex items-center justify-center transition-all duration-200  rounded-2xl  ">
                   <img src={isHovered ? cat.iconFilled : cat.iconUnfilled} alt={cat.name} className="w-25 h-25 object-cover transition-transform duration-200 group-hover:scale-110"/>
                 </div>
-                <span className="text-lg text-center leading-tight text-gray-600 group-hover:text-[#c2185b] transition-colors duration-200">{cat.name}</span>
+                <span className="text-lg text-center  font-medium leading-tight text-gray-600 group-hover:text-[#c2185b] transition-colors duration-200">{cat.name}</span>
               </Link>
             );
           })}
