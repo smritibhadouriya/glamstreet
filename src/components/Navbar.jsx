@@ -427,7 +427,7 @@ export default function Navbar() {
 
       
 {/* Category Bar with Dropdowns */}
-<div className="hidden md:flex items-center justify-center gap-8 py-3 border-t border-pink-100 bg-white relative overflow-visible" ref={categoryDropdownRef}>
+<div className="hidden md:flex  pl-55 gap-8 py-3 border-t border-pink-100 bg-white relative overflow-visible" ref={categoryDropdownRef}>
   {categoryBarItems.map((item) => (
     <div key={item.label} className="relative">
       {item.options ? (
