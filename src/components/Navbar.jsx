@@ -136,7 +136,7 @@ export default function Navbar() {
     setMobileSearchOpen(false);
     
     if (result.resultType === 'product') {
-      navigate(`/product/${result.id}`);
+      navigate(`/product/${result.slug}`);
     } else if (result.resultType === 'blog') {
       navigate(`/blog/${result.slug}`);
     }
@@ -195,7 +195,7 @@ export default function Navbar() {
   // Dropdown (shared between desktop and mobile)
   const Dropdown = () => (
     dropdownOpen ? (
-      <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl shadow-2xl border border-pink-100 z-[999] overflow-hidden max-h-96 overflow-y-auto">
+      <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl shadow-2xl border border-pink-100 z-[999] overflow-hidden max-h-96 overflow-y-auto " style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
         {results.length > 0 ? (
           <>
             <div className="px-4 py-2 border-b border-pink-50 sticky top-0 bg-white">
@@ -206,7 +206,7 @@ export default function Navbar() {
 
             {results.map((result) => (
               <button
-                key={result.id}
+                key={result.slug}
                 onMouseDown={(e) => { e.preventDefault(); handleSelect(result); }}
                 className="w-full flex items-center gap-3 px-4 py-3 hover:bg-pink-50 transition-colors text-left group border-b border-pink-50 last:border-0"
               >
@@ -310,7 +310,7 @@ export default function Navbar() {
               <Link
                 key={item.path}
                 to={item.path}
-                className={`text-sm font-medium transition-colors ${
+                className={`text-lg font-semibold transition-colors ${
                   location.pathname === item.path
                     ? 'text-[#c2185b] font-semibold'
                     : 'text-gray-700 hover:text-[#c2185b]'
@@ -324,7 +324,19 @@ export default function Navbar() {
           {/* Desktop Search + Login */}
           <div className="hidden md:flex items-center gap-4">
             <div className="relative w-72 lg:w-96" ref={desktopRef}>
-      
+      <svg
+  className="w-5 h-5 absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"
+  fill="none"
+  stroke="currentColor"
+  viewBox="0 0 24 24"
+>
+  <path
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    strokeWidth={2}
+    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+  />
+</svg>
               <input
                 type="text"
                 value={query}
@@ -338,9 +350,7 @@ export default function Navbar() {
                            hover:border-pink-300
                            focus:outline-none focus:border-[#c2185b] focus:ring-2 focus:ring-[#c2185b]/10"
               />
-              <svg className="w-5 h-5 absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-              </svg>
+          
               {query && (
                 <button
                   type="button"
@@ -425,7 +435,7 @@ export default function Navbar() {
         <>
           <button
             onClick={() => setActiveCategoryDropdown(activeCategoryDropdown === item.label ? null : item.label)}
-            className={`text-xs font-medium whitespace-nowrap transition-colors flex items-center gap-1 ${
+            className={`text-sm font-medium whitespace-nowrap transition-colors flex items-center gap-1 ${
               activeCategoryDropdown === item.label
                 ? 'text-[#c2185b]'
                 : 'text-gray-700 hover:text-[#c2185b]'
@@ -449,7 +459,7 @@ export default function Navbar() {
                 <button
                   key={option}
                   onClick={() => handleCategoryFilter(item, option)}
-                  className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-pink-50 hover:text-[#c2185b] transition-colors"
+                  className="w-full text-left px-4 py-1 text-md text-gray-700 hover:bg-pink-50 hover:text-[#c2185b] transition-colors"
                 >
                   {option}
                 </button>
@@ -461,7 +471,7 @@ export default function Navbar() {
         // Items without options (Skin Care, Makeup, Hair Care) - direct filter
         <button
           onClick={() => handleCategoryFilter(item, item.value)}
-          className="text-xs font-medium whitespace-nowrap transition-colors text-gray-700 hover:text-[#c2185b]"
+          className="text-sm font-medium whitespace-nowrap transition-colors text-gray-700 hover:text-[#c2185b]"
         >
           {item.label}
         </button>

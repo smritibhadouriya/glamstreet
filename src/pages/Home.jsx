@@ -254,11 +254,11 @@ function BannerCarousel() {
     return () => clearInterval(timerRef.current);
   }, []);
   return (
-    <div className="max-w-6xl mx-auto ">
-      <div className="relative w-full overflow-hidden h-100 md:h-[520px] md:rounded-3xl">
+    <div className=" ">
+      <div className="relative w-full overflow-hidden h-100 md:h-130 ">
         {banners.map((b, i) => (
           <Link key={b.id} to={b.to} className={`absolute inset-0 transition-opacity duration-700 ${i === current ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
-            <img src={b.img} alt={b.label} className="w-full h-full object-contain-cover"/>
+            <img src={b.img} alt={b.label} className="w-full h-full object-cover"/>
           </Link>
         ))}
       </div>
@@ -296,19 +296,22 @@ function ShopByCategory() {
         </div>
         
         {/* Desktop View - Flex layout */}
-        <div ref={cardsRef} className="hidden sm:flex flex-wrap gap-6 justify-center">
+     <div
+  ref={cardsRef}
+  className="hidden sm:grid grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-6 place-items-center"
+>
           {categories.map((cat) => {
             const isHovered = hoveredCategory === cat.name;
             return (
-              <Link
-                key={cat.name}
-                to={cat.to}
-                className="reveal-card flex flex-col items-center gap-2 group"
+             <Link
+  key={cat.name}
+  to={cat.to}
+  className="reveal-card flex flex-col items-center gap-2 group w-full max-w-[100px]"
                 onMouseEnter={() => setHoveredCategory(cat.name)}
                 onMouseLeave={() => setHoveredCategory(null)}
               >
-                <div className="w-18 h-18 flex items-center justify-center transition-all duration-200 group-hover:bg-pink-100 rounded-2xl group-hover:border-pink-200 group-hover:shadow-md group-hover:shadow-pink-200">
-                  <img src={isHovered ? cat.iconFilled : cat.iconUnfilled} alt={cat.name} className="w-12 h-12 object-cover transition-transform duration-200 group-hover:scale-110"/>
+               <div className="w-20 h-20 flex items-center justify-center transition-all duration-200 group-hover:bg-pink-100 rounded-2xl group-hover:border-pink-200 group-hover:shadow-md group-hover:shadow-pink-200">
+                  <img src={isHovered ? cat.iconFilled : cat.iconUnfilled} alt={cat.name} className="w-15 h-15 object-cover transition-transform duration-200 group-hover:scale-110"/>
                 </div>
                 <span className="text-xs font-medium text-center leading-tight text-gray-600 group-hover:text-[#c2185b] transition-colors duration-200">{cat.name}</span>
               </Link>
@@ -317,7 +320,7 @@ function ShopByCategory() {
         </div>
 
         {/* Mobile View - Carousel */}
-        <div className="sm:hidden relative">
+     <div className="sm:hidden grid grid-cols-3 gap-4 place-items-center">
           <div className="overflow-x-auto pb-4 hide-scrollbar" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
             <div className="flex gap-4 min-w-max px-2">
               {categories.map((cat) => {
