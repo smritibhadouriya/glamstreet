@@ -289,7 +289,7 @@ function ShopByCategory() {
   ];
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-15 bg-white">
       <div className="max-w-5xl mx-auto px-6">
         <div ref={sectionRef} className="reveal-section">
           <SectionHeading className="text-center mb-8">Shop By Categories</SectionHeading>
