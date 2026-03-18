@@ -254,20 +254,45 @@ function BannerCarousel() {
     return () => clearInterval(timerRef.current);
   }, []);
   return (
-    <div className=" ">
-      <div className="relative w-full overflow-hidden  aspect-[6/5] md:aspect-[16/10] lg:aspect-[21/7] ">
-        {banners.map((b, i) => (
-          <Link key={b.id} to={b.to} className={`absolute inset-0 transition-opacity duration-700 ${i === current ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
-            <img src={b.img} alt={b.label} className="w-full h-full object-cover"/>
-          </Link>
-        ))}
-      </div>
-      <div className="flex justify-center gap-2 mt-6 pb-4">
-        {banners.map((_, i) => (
-          <button key={i} onClick={() => go(i)} className={`rounded-full transition-all duration-300 ${i === current ? 'w-8 h-3 bg-[#c2185b]' : 'w-4 h-3 bg-gray-500 hover:bg-[#c2185b]'}`}/>
-        ))}
-      </div>
+<div>
+  <div className="relative w-full overflow-hidden  
+    aspect-[6/5] md:aspect-[16/10] lg:aspect-[21/7]">
+
+    {banners.map((b, i) => (
+      <Link
+        key={b.id}
+        to={b.to}
+        className={`absolute inset-0 transition-opacity duration-700 ${
+          i === current
+            ? "opacity-100 pointer-events-auto"
+            : "opacity-0 pointer-events-none"
+        }`}
+      >
+        <img
+          src={b.img}
+          alt={b.label}
+          className="w-full h-full object-cover"
+        />
+      </Link>
+    ))}
+
+    {/* 👇 DOTS OVERLAY */}
+    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+      {banners.map((_, i) => (
+        <button
+          key={i}
+          onClick={() => go(i)}
+          className={`rounded-full transition-all duration-300 ${
+            i === current
+              ? "w-8 h-3 bg-[#c2185b]"
+              : "w-4 h-3 bg-white/70 hover:bg-[#c2185b]"
+          }`}
+        />
+      ))}
     </div>
+
+  </div>
+</div>
   );
 }
 
@@ -289,7 +314,7 @@ function ShopByCategory() {
   ];
 
   return (
-    <section className="py-15 bg-white">
+    <section className="pt-15 pb-22 bg-white">
       <div className="max-w-5xl mx-auto px-6">
         <div ref={sectionRef} className="reveal-section">
           <SectionHeading className="text-center mb-8">Shop By Categories</SectionHeading>
