@@ -310,8 +310,8 @@ function ShopByCategory() {
                 onMouseEnter={() => setHoveredCategory(cat.name)}
                 onMouseLeave={() => setHoveredCategory(null)}
               >
-               <div className="w-20 h-20 flex items-center justify-center transition-all duration-200 group-hover:bg-pink-100 rounded-2xl group-hover:border-pink-200 group-hover:shadow-md group-hover:shadow-pink-200">
-                  <img src={isHovered ? cat.iconFilled : cat.iconUnfilled} alt={cat.name} className="w-15 h-15 object-cover transition-transform duration-200 group-hover:scale-110"/>
+               <div className="w-30 h-30 flex items-center justify-center transition-all duration-200 group-hover:bg-pink-100 rounded-2xl group-hover:border-pink-200 group-hover:shadow-md group-hover:shadow-pink-200">
+                  <img src={isHovered ? cat.iconFilled : cat.iconUnfilled} alt={cat.name} className="w-25 h-25 object-cover transition-transform duration-200 group-hover:scale-110"/>
                 </div>
                 <span className="text-xs font-medium text-center leading-tight text-gray-600 group-hover:text-[#c2185b] transition-colors duration-200">{cat.name}</span>
               </Link>
@@ -333,8 +333,8 @@ function ShopByCategory() {
                     onMouseEnter={() => setHoveredCategory(cat.name)}
                     onMouseLeave={() => setHoveredCategory(null)}
                   >
-                    <div className="w-16 h-16 flex items-center justify-center transition-all duration-200 bg-pink-50 rounded-xl border border-pink-100 shadow-sm shadow-pink-100">
-                      <img src={isHovered ? cat.iconFilled : cat.iconUnfilled} alt={cat.name} className="w-10 h-10 object-cover"/>
+                    <div className="w-20 h-20 flex items-center justify-center transition-all duration-200 bg-pink-50 rounded-xl border border-pink-100 shadow-sm shadow-pink-100">
+                      <img src={isHovered ? cat.iconFilled : cat.iconUnfilled} alt={cat.name} className="w-18 h-18 object-cover"/>
                     </div>
                     <span className="text-[10px] font-medium text-center leading-tight text-gray-600">{cat.name}</span>
                   </Link>
