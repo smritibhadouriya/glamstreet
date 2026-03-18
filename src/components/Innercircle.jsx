@@ -84,7 +84,7 @@ export const InnerCircleSection = () => {
           )}
         </div>
         
-        <h2 className="relative text-white font-bold text-2xl md:text-3xl mb-3 tracking-tight font-playfair">
+        <h2 className="relative text-white font-semibold text-2xl md:text-3xl mb-3 tracking-tight font-playfair">
           {subscriptionStatus === 'success' && isAnimating ? 'Thank You!' : 'Join the Inner Circle'}
         </h2>
         

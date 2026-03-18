@@ -220,7 +220,7 @@ const LockIcon = () => (
 // ── Consistent section heading ────────────────────────────────────
 function SectionHeading({ children, className = "" }) {
   return (
-    <h2 className={`font-playfair text-2xl md:text-3xl font-bold text-gray-900 ${className}`}>
+    <h2 className={`font-playfair text-2xl md:text-3xl font-semibold text-gray-900 ${className}`}>
       {children}
     </h2>
   );
@@ -289,7 +289,7 @@ function ShopByCategory() {
   ];
 
   return (
-    <section className="py-8 bg-white">
+    <section className="py-20 bg-white">
       <div className="max-w-5xl mx-auto px-6">
         <div ref={sectionRef} className="reveal-section">
           <SectionHeading className="text-center mb-8">Shop By Categories</SectionHeading>
@@ -306,14 +306,14 @@ function ShopByCategory() {
              <Link
   key={cat.name}
   to={cat.to}
-  className="reveal-card flex flex-col items-center gap-2 group w-full max-w-[100px]"
+  className="reveal-card flex flex-col items-center gap-2 group w-full max-w-35"
                 onMouseEnter={() => setHoveredCategory(cat.name)}
                 onMouseLeave={() => setHoveredCategory(null)}
               >
                <div className="w-30 h-30 flex items-center justify-center transition-all duration-200  rounded-2xl  ">
                   <img src={isHovered ? cat.iconFilled : cat.iconUnfilled} alt={cat.name} className="w-25 h-25 object-cover transition-transform duration-200 group-hover:scale-110"/>
                 </div>
-                <span className="text-xs font-medium text-center leading-tight text-gray-600 group-hover:text-[#c2185b] transition-colors duration-200">{cat.name}</span>
+                <span className="text-lg text-center leading-tight text-gray-600 group-hover:text-[#c2185b] transition-colors duration-200">{cat.name}</span>
               </Link>
             );
           })}
@@ -1181,7 +1181,7 @@ function ContactCTA() {
     <section className="py-16 text-white" style={{ background: "radial-gradient(ellipse at center, #3d0a1e 0%, #1a0610 60%, #0f0409 100%)" }}>
       <div ref={sectionRef} className="reveal-section max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 md:gap-16 items-center">
         <div className="text-center md:text-left">
-          <h2 className="font-playfair text-3xl md:text-4xl font-bold mb-4">Let's talk beauty.</h2>
+          <h2 className="font-playfair text-3xl md:text-4xl font-semibold mb-4">Let's talk beauty.</h2>
           <div className="grid grid-cols-2 gap-8 my-10 md:my-12">
             {[['100k+', 'Happy Customers'],['50+', 'Expert Estheticians'],['15+', 'Awards Won'],['0%', 'Animal Cruelty']].map(([stat, label]) => (
               <div key={label}>
