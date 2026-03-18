@@ -255,7 +255,7 @@ function BannerCarousel() {
   }, []);
   return (
     <div className=" ">
-      <div className="relative w-full overflow-hidden h-100 md:h-130 ">
+      <div className="relative w-full overflow-hidden  aspect-[6/5] md:aspect-[16/10] lg:aspect-[21/7] ">
         {banners.map((b, i) => (
           <Link key={b.id} to={b.to} className={`absolute inset-0 transition-opacity duration-700 ${i === current ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
             <img src={b.img} alt={b.label} className="w-full h-full object-cover"/>
@@ -289,7 +289,7 @@ function ShopByCategory() {
   ];
 
   return (
-    <section className="py-10 bg-white">
+    <section className="py-8 bg-white">
       <div className="max-w-5xl mx-auto px-6">
         <div ref={sectionRef} className="reveal-section">
           <SectionHeading className="text-center mb-8">Shop By Categories</SectionHeading>
@@ -298,7 +298,7 @@ function ShopByCategory() {
         {/* Desktop View - Flex layout */}
      <div
   ref={cardsRef}
-  className="hidden sm:grid grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-6 place-items-center"
+  className="hidden md:grid grid-cols-3 md:grid-cols-4 lg:grid-cols-7 place-items-center"
 >
           {categories.map((cat) => {
             const isHovered = hoveredCategory === cat.name;
@@ -320,7 +320,7 @@ function ShopByCategory() {
         </div>
 
         {/* Mobile View - Carousel */}
-     <div className="sm:hidden grid grid-cols-3 gap-4 place-items-center">
+<div className="sm:hidden overflow-x-auto pb-4 hide-scrollbar">
           <div className="overflow-x-auto pb-4 hide-scrollbar" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
             <div className="flex gap-4 min-w-max px-2">
               {categories.map((cat) => {
